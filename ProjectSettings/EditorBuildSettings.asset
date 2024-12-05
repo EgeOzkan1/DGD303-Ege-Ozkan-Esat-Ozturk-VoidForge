@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/HordeHighway.unity
+    guid: 4d3bae73fc9760f42b7b2a265b583ac3
   m_configObjects: {}
