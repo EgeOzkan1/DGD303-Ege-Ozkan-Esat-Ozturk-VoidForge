@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: f09afc3129e4d184da75904cd250986e
+  - enabled: 1
     path: Assets/Scenes/HordeHighway.unity
     guid: 4d3bae73fc9760f42b7b2a265b583ac3
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: d16721642dcebb44e97d69fda5bd7605
   m_configObjects: {}

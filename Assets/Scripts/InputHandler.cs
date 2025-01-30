@@ -6,9 +6,8 @@ public class InputHandler : MonoBehaviour
 {
     public Vector2 InputVector { get; private set; }
     public Vector3 MousePosition { get; private set; }
-    public bool IsShooting { get; private set; } // New property for shooting input
+    public bool IsShooting { get; private set; }
 
-    // Update is called once per frame
     void Update()
     {
         // Capture movement input
@@ -19,7 +18,7 @@ public class InputHandler : MonoBehaviour
         // Capture mouse position
         MousePosition = Input.mousePosition;
 
-        // Capture shooting input
-        IsShooting = Input.GetMouseButtonDown(0); // Left mouse button
+        // Capture shooting input (continuous while holding)
+        IsShooting = Input.GetMouseButton(0); // Holding left mouse button
     }
 }

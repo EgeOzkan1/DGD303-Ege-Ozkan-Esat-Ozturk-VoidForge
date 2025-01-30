@@ -52,6 +52,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 95421449593400676, guid: 6cb63163261c5a84a8a7410cf0775135, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 475e6b916a169584a8a6875eeddb4cd4, type: 2}
+    - target: {fileID: 95421449593400676, guid: 6cb63163261c5a84a8a7410cf0775135, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -90,7 +98,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 0.6
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
@@ -117,7 +125,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
@@ -134,6 +142,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DetectionRange: 15
-  MovementSpeed: 4
+  MovementSpeed: 0
   StoppingDistance: 1
   MaxHealth: 100
+  Damage: 10
+  AttackRange: 2
+  AttackCooldown: 1
+  experienceDropPrefab: {fileID: 9004638440968949781, guid: 67294684bb3d127479b2165ea66c82af, type: 3}
+  experienceAmount: 10

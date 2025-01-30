@@ -110,8 +110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac1b469abaf99c4a891872f4bd14976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 25
-  Lifetime: 2
+  damage: 35
+  lifetime: 2
 --- !u!135 &-1134569236036377409
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -5,15 +5,21 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField]
-    private int Damage = 25; // Damage dealt by the bullet
+    private int damage = 25; // Default damage value
 
     [SerializeField]
-    private float Lifetime = 2f; // Time before the bullet gets destroyed automatically
+    private float lifetime = 2f; // Time before the bullet gets destroyed automatically
 
     private void Start()
     {
         // Automatically destroy the bullet after its lifetime
-        Destroy(gameObject, Lifetime);
+        Destroy(gameObject, lifetime);
+    }
+
+    // Method to set the bullet damage (can be called from the player or bullet spawner)
+    public void SetDamage(int newDamage)
+    {
+        damage = newDamage;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -23,11 +29,14 @@ public class Bullet : MonoBehaviour
         if (zombie != null)
         {
             // Apply damage to the zombie
-            zombie.TakeDamage(Damage);
+            zombie.TakeDamage(damage);
         }
 
-        // Destroy the bullet upon collision with any object
-        Destroy(gameObject);
+        // Destroy the bullet upon collision with a zombie or other valid targets
+        if (!collision.gameObject.CompareTag("Bullet")) // Assuming bullets have a "Bullet" tag
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -37,10 +46,13 @@ public class Bullet : MonoBehaviour
         if (zombie != null)
         {
             // Apply damage to the zombie
-            zombie.TakeDamage(Damage);
+            zombie.TakeDamage(damage);
         }
 
-        // Destroy the bullet upon trigger collision
-        Destroy(gameObject);
+        // Destroy the bullet upon trigger collision with valid targets
+        if (!other.CompareTag("Bullet")) // Assuming bullets have a "Bullet" tag
+        {
+            Destroy(gameObject);
+        }
     }
 }
