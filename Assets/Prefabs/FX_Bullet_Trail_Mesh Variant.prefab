@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FX_Bullet_Trail_Mesh Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 1046001694842650, guid: 9eb7304a6c9aedb40abba583aff826c5, type: 3}
+      propertyPath: m_TagString
+      value: Bullet
+      objectReference: {fileID: 0}
     - target: {fileID: 4638714538486548, guid: 9eb7304a6c9aedb40abba583aff826c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -110,7 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bac1b469abaf99c4a891872f4bd14976, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 35
+  damage: 40
   lifetime: 2
 --- !u!135 &-1134569236036377409
 SphereCollider:

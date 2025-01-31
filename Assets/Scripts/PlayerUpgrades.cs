@@ -6,17 +6,19 @@ public class PlayerUpgrades : MonoBehaviour
 {
     [Header("Upgrades")]
     public int projectiles = 1;
-    public float shootingCooldown = 0.5f;
-    public float bulletDamage = 25f;  // Set default bullet damage
+    public float shootingCooldown = 0.40f;
+    public float bulletDamage = 40f;  // Set default bullet damage
     public int maxHealth = 100;  // Max health of the player
     public int currentHealth;  // Current health of the player
 
     private PlayerHealth playerHealth; // Reference to PlayerHealth script
+    private TopDownCharacterMover characterMover;  // Reference to TopDownCharacterMover script
 
     private void Start()
     {
-        // Get the PlayerHealth component at the start
+        // Get the PlayerHealth and TopDownCharacterMover components at the start
         playerHealth = GetComponent<PlayerHealth>();
+        characterMover = GetComponent<TopDownCharacterMover>(); // Ensure it's attached to the player
 
         // Reset to default values when starting a new game
         ResetUpgrades();
@@ -34,6 +36,13 @@ public class PlayerUpgrades : MonoBehaviour
         IncreaseBulletDamage();
         IncreaseHealth();
 
+        // Update the TopDownCharacterMover script with new shootingCooldown and bulletDamage
+        if (characterMover != null)
+        {
+            characterMover.UpdateShootingCooldown(shootingCooldown); // Pass the new shooting cooldown
+            characterMover.UpdateBulletDamage(bulletDamage); // Pass the new bullet damage
+        }
+
         // Log upgrade application
         Debug.Log("All upgrades applied at level up.");
     }
@@ -42,8 +51,8 @@ public class PlayerUpgrades : MonoBehaviour
     private void ResetUpgrades()
     {
         // Reset upgrades to default values
-        bulletDamage = 25f; // Default bullet damage
-        shootingCooldown = 0.5f; // Default shooting cooldown
+        bulletDamage = 40f; // Default bullet damage
+        shootingCooldown = 0.40f; // Default shooting cooldown
         maxHealth = 100; // Default max health
         currentHealth = maxHealth; // Reset current health
 
@@ -51,7 +60,7 @@ public class PlayerUpgrades : MonoBehaviour
         Debug.Log("Player upgrades have been reset for a new game.");
     }
 
-    // Apply all upgrade actions at once
+    // Reduce shooting cooldown
     private void ReduceShootingCooldown()
     {
         // Reduce shooting cooldown, hard cap to 0.05f
@@ -59,6 +68,7 @@ public class PlayerUpgrades : MonoBehaviour
         Debug.Log("Shooting cooldown reduced.");
     }
 
+    // Increase bullet damage
     private void IncreaseBulletDamage()
     {
         // Increase bullet damage
@@ -66,11 +76,12 @@ public class PlayerUpgrades : MonoBehaviour
         Debug.Log("Bullet damage increased.");
     }
 
+    // Increase health
     private void IncreaseHealth()
     {
-        // Increase max health and current health by 20
-        maxHealth += 20;
-        currentHealth += 20; // Add to current health instead of replenishing
+        // Increase max health and current health
+        maxHealth += 15;
+        currentHealth += 25; // Add to current health instead of replenishing
 
         // Apply the change to PlayerHealth script
         playerHealth.IncreaseHealth(20);  // Call IncreaseHealth from PlayerHealth script

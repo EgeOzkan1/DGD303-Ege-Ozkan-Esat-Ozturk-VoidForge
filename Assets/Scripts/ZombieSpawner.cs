@@ -89,9 +89,9 @@ public class ZombieSpawner : MonoBehaviour
                 int minutes = elapsedTime / 60;
                 if (minutes <= 5)
                 {
-                    spawnInterval = Mathf.Max(spawnInterval * 0.8f, 0.5f);
-                    zombieHealth += 25;
-                    zombieDamage += 5; // Increase damage over time
+                    spawnInterval = Mathf.Max(spawnInterval * 0.7f, 0.5f);
+                    zombieHealth += 20;
+                    zombieDamage += 3; // Increase damage over time
 
                     Debug.Log($"Time: {minutes} min - Spawn Rate: {spawnInterval}s, Health: {zombieHealth}, Damage: {zombieDamage}");
                 }

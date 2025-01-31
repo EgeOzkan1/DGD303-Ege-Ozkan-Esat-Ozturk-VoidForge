@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField]
-    private int damage = 25; // Default damage value
+    private int damage = 40; // Default damage value
 
     [SerializeField]
     private float lifetime = 2f; // Time before the bullet gets destroyed automatically

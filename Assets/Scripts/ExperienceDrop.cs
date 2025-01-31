@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ExperienceDrop : MonoBehaviour
 {
-    public int Amount = 90;  // Amount of experience this drop gives to the player
+    public int Amount = 10;  // Amount of experience this drop gives to the player
 
     private void OnTriggerEnter(Collider other)
     {

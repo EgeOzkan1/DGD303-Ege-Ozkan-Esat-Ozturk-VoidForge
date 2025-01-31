@@ -1,10 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro; // For UI
 
-[RequireComponent(typeof(InputHandler))]
-[RequireComponent(typeof(Animator))]
 public class TopDownCharacterMover : MonoBehaviour
 {
     private InputHandler _input;
@@ -36,6 +33,9 @@ public class TopDownCharacterMover : MonoBehaviour
     private float ShootingCooldown = 0.5f; // Time between shots
     private float _lastShotTime;
 
+    [Header("Sound Effects")]
+    private ShootingSoundManager shootingSoundManager; // Reference to ShootingSoundManager
+
     private PlayerHealth playerHealth; // Reference to the player's health system
 
     private void Awake()
@@ -43,6 +43,7 @@ public class TopDownCharacterMover : MonoBehaviour
         _input = GetComponent<InputHandler>();
         _animator = GetComponent<Animator>();
         playerHealth = GetComponent<PlayerHealth>(); // Get the PlayerHealth component
+        shootingSoundManager = GetComponent<ShootingSoundManager>(); // Get the ShootingSoundManager component
     }
 
     void Update()
@@ -68,6 +69,7 @@ public class TopDownCharacterMover : MonoBehaviour
         if (_input.IsShooting && Time.time >= _lastShotTime + ShootingCooldown)
         {
             ShootProjectile();
+            PlayShootSound(); // Play the shooting sound when shooting
             _lastShotTime = Time.time;
         }
     }
@@ -152,31 +154,30 @@ public class TopDownCharacterMover : MonoBehaviour
         projectile.transform.rotation = Quaternion.LookRotation(ProjectileSpawnPoint.forward);
     }
 
-    // Method for reducing shooting cooldown after upgrade
-    public void ReduceShootingCooldown()
+    // Play shooting sound
+    private void PlayShootSound()
     {
-        ShootingCooldown = Mathf.Max(ShootingCooldown - 0.1f, 0.05f); // Ensure cooldown doesn't go below 0.05 seconds
-        Debug.Log("Shooting cooldown reduced!");
+        if (shootingSoundManager != null)
+        {
+            shootingSoundManager.PlayShootSound(); // Call PlayShootSound method from ShootingSoundManager
+        }
     }
 
-    // Method for increasing bullet damage after upgrade
-    private void IncreaseBulletDamage()
+    // Update shooting cooldown
+    public void UpdateShootingCooldown(float newCooldown)
+    {
+        ShootingCooldown = newCooldown;
+        Debug.Log("Shooting cooldown updated.");
+    }
+
+    // Update bullet damage
+    public void UpdateBulletDamage(float newBulletDamage)
     {
         Bullet bullet = ProjectilePrefab.GetComponent<Bullet>();
         if (bullet != null)
         {
-            bullet.SetDamage(30);  // Set a new damage value
-            Debug.Log("Bullet damage increased!");
-        }
-    }
-
-    // Method for increasing health after upgrade
-    public void IncreaseHealth(int amount)
-    {
-        if (playerHealth != null)
-        {
-            playerHealth.IncreaseHealth(amount); // Call the IncreaseHealth method in PlayerHealth
-            Debug.Log("Health increased!");
+            bullet.SetDamage((int)newBulletDamage);  // Cast the float to int
+            Debug.Log("Bullet damage updated.");
         }
     }
 }
